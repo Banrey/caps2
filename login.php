@@ -24,8 +24,14 @@
 
                     
                 </div>
-            </div>        
+                
+            </div>  
+            <div class="alert alert-primary my-3"> <!--blue (primary) alert box-->
+                    <h3>Want to use Superphishal for work?</h3>
+                    <a href="companyPortal.php">Enter the Company Portal here</a>
+            </div>      
     </div>
+
 
 </div>
 
