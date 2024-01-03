@@ -9,7 +9,7 @@
    
 <?php 
     include("connCheck.php");
-    include("login.php");
+    include("companyAccLogin.php");
 
 
 
