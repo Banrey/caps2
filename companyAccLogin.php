@@ -65,7 +65,7 @@
                         window.location = "companyDash.php";
                         
                         
-						} 
+						} else{alert("Wrong Credentials");}
                     })
                 }
             });

@@ -22,7 +22,7 @@ WHERE
         
         mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $companyID);
         while(mysqli_stmt_fetch($statement_check)){
-            if($ctr == 1){
+            if($ctr == 1 && $companyID !== 0){
                 session_start();
                 $_SESSION['session_id'] = session_id();
                 $_SESSION['accID'] = $accID;

@@ -8,12 +8,8 @@
 
    
 <?php 
-    include("connCheck.php");
+    include_once("connCheck.php");
     include("login.php");
-
-
-
-
      ?>
        
 

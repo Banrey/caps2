@@ -4,4 +4,5 @@ if(!file_exists("connect.php")){
     exit();
 }
 include("connect.php");
+
 ?>

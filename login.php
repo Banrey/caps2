@@ -18,8 +18,9 @@
                     </div>
 
                     <div class="form-group py-2 mx-2">
-                        <button type="button" id="BtnLogin" class="btn btn-primary btn-block">Login</button>
-                        Don't have an account? <a href="registration.php">Click here to Register</a>   
+                        <button type="button" id="BtnLogin" class="btn btn-primary btn-block py-auto">Login</button>
+                       <span class="float-end">Don't have an account? <a href="registration.php">Click here to Register</a> </span>  
+                       <span class="float-end">In a hurry? <a href="guestDash.php">Login as Guest Here</a> </span>   
                     </div>
 
                     
@@ -65,7 +66,7 @@
                     
 						if(status == "success"){                          
 							
-                        window.location = "dashboard.php";
+                        window.location = "personalDash.php";
                         
                         
 						} 

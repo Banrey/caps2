@@ -20,17 +20,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../public/vlog.php" class="nav-link link-dark align-middle px-0">
+                        <a href="../vlog.php" class="nav-link link-dark align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Vlogs</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../public/forum.php" class="nav-link link-dark align-middle px-0">
+                        <a href="../forum.php" class="nav-link link-dark align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Forum</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="http://localhost:3000" class="nav-link link-dark align-middle px-0">
+                        <a href="../index.php" class="nav-link link-dark align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Login</span>
                         </a>
                     </li>
