@@ -110,7 +110,7 @@ include("header.php");
 		};
 
         conn.onmessage = function(e) {
-        console.log(e.data);
+        //console.log(e.data);
 
         var data = JSON.parse(e.data);
 
