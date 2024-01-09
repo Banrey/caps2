@@ -25,26 +25,36 @@
                         </div>
                         <div class="card-body">                    
                             
-                            <div class="form-group">
-                                 <label class="required">Administrator E-mail Address *</label>   
-                                <input type="text" id="regEmailAddress" class="form-control rounded" placeholder="E-mail" > 
+                        <form  action = "process.registration.php" id="register_form" method="post" target="empty">                           
+                                <div class="form-group" >
+                                 <label class="required">Admin User Name</label>   
+                                <input type="text" id="regusername" name="username" class="form-control rounded" data-parsley-pattern="/^[a-zA-Z\s]+$/" required placeholder="User Name" > 
                             </div>
                             
                             <div class="form-group">
-                                 <label class="required">Administrator Username *</label>   
-                                <input type="text" id="regUsername" class="form-control rounded" placeholder="Username" > 
+                                 <label class="required">Admin E-mail Address</label>   
+                                <input type="email" id="regEmailAddress" name="email_address" class="form-control rounded" placeholder="E-mail" required> 
                             </div>
 
                             <div class="form-group ">
-                                <label class="required">Administrator Password *</label>   
-                                <input type="password" id="regPassword" class="form-control rounded" placeholder="Password" > 
+                                <label class="required">Admin Password</label>   
+                                <input type="password" id="regPassword" name="password" class="form-control rounded" placeholder="Password" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
+                                
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="required">Confirm Password</label>   
+                                <input type="password" id="regConPassword" name="confirmPassword" class="form-control rounded" placeholder="Confirm Password" data-parsley-equalto="#regPassword" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
                                 
                             </div>
 
                             <div class="form-group py-2">
-                                <button type="button" id="BtnReg" class="btn btn-primary btn-block">Reg</button>
-                                
+                                <input type="submit" name="register" id="BtnReg" class="btn btn-success" value="Register">
+                                <span class="float-end mx-3 my-2">Already have an admin account? <a href="cAdminLogin.php">Click here to Login</a> </span>  
                             </div>
+                            
+                        
+                            </form>
                         </div>
                 </div>        
 
@@ -57,34 +67,27 @@
 </div>
 
     <script language="javascript">
-        $("#BtnReg").on("click", function() {
-                var alertNotice = "Fields marked with * are required.";
+        
+        $(document).ready(function(){
 
-                var email = $("#regEmailAddress").val();
-                var password = $("#regPassword").val();
-                var username = $("#regUsername").val();
+$('#register_form').parsley();
 
-                if (email == null || email == "") {
-                    alert(alertNotice);
-                    $("#EmailAddress").focus();
-                }
-                
-                else if (password == null || password == "") {
-                    alert(alertNotice);
-                    $("#Password").focus();
-                }
-                
-                else if (username == null || username == "") {
-                    alert(alertNotice);
-                    $("#username").focus();
-                }
-            
-                
-                
+    $('#register_form').parsley().on('form:submit', function() {
 
-                else {
+        var email = $("#regEmailAddress").val();
+        var password = $("#regPassword").val();
+        var username = $("#regusername").val();
+
+        let html_data = `
+     <div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
+                    <h3>Processing Request</h3>
+                    <p>Check your email for a verification link or contact us at superphishalteam@gmail.com</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  `;
+        
+        $('#cont').append(html_data);
                     
-                    $.post("process.adminReg.php", {
+        $.post("process.adminReg.php", {
                         email_address: email,
                         password: password,
                         username: username
@@ -94,8 +97,8 @@
 						window.location = "cAdminLogin.php?p=Login_first_time";
 						}
                     })
-                }
-            });
+  });
+});
 
 
     </script>

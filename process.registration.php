@@ -55,24 +55,31 @@ $sql_insert = "INSERT INTO tblusers
                                          
 
                 try {
-                    $mail->SMTPDebug = 2;									 
+                    $mail->SMTPDebug = false;									 
                     $mail->isSMTP();										 
                     $mail->Host	 = 'smtp.gmail.com;';				 
                     $mail->SMTPAuth = true;							 
-                    $mail->Username = 'renegerardcordura@gmail.com';				 
-                    $mail->Password = 'xhpt mwvq plza cajp';					 
+                    $mail->Username = 'superphishalteam@gmail.com';				 
+                    $mail->Password = 'chzc akbv ndop mloz';					 
                     $mail->SMTPSecure = 'tls';							 
                     $mail->Port	 = 587; 
 
-                    $mail->setFrom('renegerardcordura@gmail.com', 'rene');		 
+                    $mail->setFrom('superphishalteam@gmail.com', 'rene');		 
                     $mail->addAddress($email_address);
                     
                     $mail->isHTML(true);								 
                     $mail->Subject = 'Account Verification';
-                    $mail->Body = 'HTML message body in <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$verficationCode.'>Verify Your account here </a></p>';
+                    $mail->Body = 'Please click the link to verify your Superphishal account <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$verficationCode.'">Verify Your account here </a></p>';
                     $mail->AltBody = 'Body in plain text for non-HTML mail clients';
                     $mail->send();
                     echo "Mail has been sent successfully!";
+                    ?>
+                    <script>
+                
+                
+            </script>
+                    <?php
+                    
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
@@ -81,4 +88,6 @@ $sql_insert = "INSERT INTO tblusers
             else {
                 echo "Unable to prepare query:". $sql_insert . " " .mysqli_error($conn). "<br />";
                 exit();
-            }
+            }?>
+
+            

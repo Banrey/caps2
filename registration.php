@@ -12,7 +12,7 @@ if (isset($_GET['account']) && $_GET['account'] == 'registered'){
             </div>  
      <?php }?>
      
-<div class="container-fluid">
+<div class="container-fluid" id="cont">
     <div class="row">
         <div class="col-sm-12 text-center"></div>
     </div>
@@ -30,6 +30,7 @@ if (isset($_GET['account']) && $_GET['account'] == 'registered'){
             
 
             </div>
+            <iframe name="empty" style="display:none;"></iframe>
 
             <div class="col-sm-6 my-4">
                 <div class="card">
@@ -38,20 +39,26 @@ if (isset($_GET['account']) && $_GET['account'] == 'registered'){
 
                         </div>
                         <div class="card-body">
-                                <form  action = "process.registration.php" id="register_form" method="post">                           
+                            <form  action = "process.registration.php" id="register_form" method="post" target="empty">                           
                                 <div class="form-group" >
-                                 <label class="required">User Name *</label>   
+                                 <label class="required">User Name</label>   
                                 <input type="text" id="regusername" name="username" class="form-control rounded" data-parsley-pattern="/^[a-zA-Z\s]+$/" required placeholder="User Name" > 
                             </div>
                             
                             <div class="form-group">
-                                 <label class="required">E-mail Address *</label>   
+                                 <label class="required">E-mail Address</label>   
                                 <input type="email" id="regEmailAddress" name="email_address" class="form-control rounded" placeholder="E-mail" required> 
                             </div>
 
                             <div class="form-group ">
-                                <label class="required">Password *</label>   
+                                <label class="required">Password</label>   
                                 <input type="password" id="regPassword" name="password" class="form-control rounded" placeholder="Password" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
+                                
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="required">Confirm Password</label>   
+                                <input type="password" id="regConPassword" name="password" class="form-control rounded" placeholder="Confirm Password" data-parsley-equalto="#regPassword" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
                                 
                             </div>
 
@@ -79,14 +86,21 @@ if (isset($_GET['account']) && $_GET['account'] == 'registered'){
 
 $('#register_form').parsley();
 
-$("#register_form").on('form:submit', function(e){   
-    e.preventDefault();
-            var form = $(this);
+    $('#register_form').parsley().on('form:submit', function() {
 
-
-                var email = $("#regEmailAddress").val();
+        var email = $("#regEmailAddress").val();
                 var password = $("#regPassword").val();
                 var username = $("#regusername").val();
+
+        let html_data = `
+     <div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
+                    <h3>Processing Request</h3>
+                    <p>Check your email for a verification link or contact us at superphishalteam@gmail.com</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  `;
+        
+        $('#cont').append(html_data);
+                
 
                     
                     $.post("process.registration.php", {
@@ -94,16 +108,14 @@ $("#register_form").on('form:submit', function(e){
                         password: password,
                         username: username
                     }, function(data,status) {
-						if(status == "success"){
-                        alert("You have successfully registered");
-						window.location = "index.php?p=Login_first_time";
+						if(status == "success"){                       
+                window.location = "index.php?status=registered";
 						}
                     })
-           
+  });
 
 
 
-});
 
 });
 

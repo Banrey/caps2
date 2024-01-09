@@ -30,24 +30,25 @@ WHERE
         while(mysqli_stmt_fetch($statement_check)){
             if($ctr >= 1){
                 try {
-                    $mail->SMTPDebug = 2;									 
+                    $mail->SMTPDebug = false;									 
                     $mail->isSMTP();										 
                     $mail->Host	 = 'smtp.gmail.com;';				 
                     $mail->SMTPAuth = true;							 
-                    $mail->Username = 'renegerardcordura@gmail.com';				 
-                    $mail->Password = 'xhpt mwvq plza cajp';					 
+                    $mail->Username = 'superphishalteam@gmail.com';				 
+                    $mail->Password = 'chzc akbv ndop mloz';					 
                     $mail->SMTPSecure = 'tls';							 
                     $mail->Port	 = 587; 
 
-                    $mail->setFrom('renegerardcordura@gmail.com', 'rene');		 
-                    $mail->addAddress($_POST['email']);
+                    $mail->setFrom('superphishalteam@gmail.com', 'rene');		 
+                    $mail->addAddress($email);
                     
                     $mail->isHTML(true);								 
                     $mail->Subject = 'Account Verification';
-                    $mail->Body = 'HTML message body in <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$verficationCode.'">Verify Your account here </a></p>';
+                    $mail->Body = 'Please click the link to verify your Superphishal account <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$verficationCode.'">Verify Your account here </a></p>';
                     $mail->AltBody = 'Body in plain text for non-HTML mail clients';
                     $mail->send();
-                    echo "Mail has been sent successfully!";
+                    echo "Mail has been sent successfully!";    
+                    
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }

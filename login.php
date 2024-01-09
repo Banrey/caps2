@@ -9,16 +9,27 @@ if (isset($_GET['status']) && $_GET['status'] == 'disabled'){
             </div>  
      <?php }?>
 
-     <?php
+<?php
 if (isset($_GET['status']) && $_GET['status'] == 'verified'){
-     ?>  
-     
-     <div class="alert alert-success alert-dismissible fade show my-3" role="alert"> <!--green (success) alert box-->
-                    <h3>Your Account has been verified</h3>
-                    <p>You may now log in to your account</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>  
-     <?php }?>
+?>  
+
+<div class="alert alert-success alert-dismissible fade show my-3" role="alert"> <!--green (success) alert box-->
+               <h3>Your Account has been verified</h3>
+               <p>You may now log in to your account</p>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>  
+<?php }?>
+
+<?php
+if (isset($_GET['status']) && $_GET['status'] == 'registered'){
+?>  
+
+<div class="alert alert-success alert-dismissible fade show my-3" role="alert"> <!--green (success) alert box-->
+               <h3>Your Account has been Registered</h3>
+                <p>Please verify your account by following the instructions sent to your email</p>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>  
+<?php }?>
 <div class="container-fluid">
     <div class="col-sm-4 my-4">
         <div class="card">
