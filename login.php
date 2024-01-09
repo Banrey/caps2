@@ -1,3 +1,24 @@
+<?php
+if (isset($_GET['status']) && $_GET['status'] == 'disabled'){
+     ?>  
+     
+     <div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
+                    <h3>Your Account has not been verified</h3>
+                    <p>Check your email for a verification link or contact us at superphishalteam@gmail.com</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  
+     <?php }?>
+
+     <?php
+if (isset($_GET['status']) && $_GET['status'] == 'verified'){
+     ?>  
+     
+     <div class="alert alert-success alert-dismissible fade show my-3" role="alert"> <!--green (success) alert box-->
+                    <h3>Your Account has been verified</h3>
+                    <p>You may now log in to your account</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  
+     <?php }?>
 <div class="container-fluid">
     <div class="col-sm-4 my-4">
         <div class="card">
@@ -6,24 +27,26 @@
 
             </div>
                 <div class="card-body">
-                    <div class="form-group required">
-                        <label>Username*</label>   
-                        <input type="text" id="Username" class="form-control rounded" placeholder="Username" > 
-                    </div>
+                    <form action="process.login.php" id="login_form" method="post">                    
+                <div class="form-group" >
+                                 <label class="required">Email *</label>   
+                                <input type="email" id="Email" name="email" class="form-control rounded" placeholder="E-mail" required> 
+                </div>
 
-                    <div class="form-group required">
-                        <label>Password*</label>   
-                        <input type="password" id="Password" class="form-control rounded" placeholder="Password" > 
-                                    
-                    </div>
+                <div class="form-group ">
+                                <label class="required">Password *</label>   
+                                <input type="password" id="Password" name="password" class="form-control rounded" placeholder="Password" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
+                                
+                </div>
 
                     <div class="form-group py-2 mx-2">
-                        <button type="button" id="BtnLogin" class="btn btn-primary btn-block py-auto">Login</button>
+                                <input type="submit" id="BtnLogin" name="login" class="btn btn-primary" value="Login">
+                                
+                            </div>
                        <span class="float-end">Don't have an account? <a href="registration.php">Click here to Register</a> </span>  
                        <span class="float-end">In a hurry? <a href="guestDash.php">Login as Guest Here</a> </span>   
                     </div>
-
-                    
+                    </form>                    
                 </div>
                 
             </div>  
@@ -37,42 +60,7 @@
 </div>
 
             
-            <script language="javascript">
+    <script language="javascript">
 		
-        $("#BtnLogin").on("click", function() {
-                
-            var alertNotice = "Fields marked with * are required.";
-            
-
-                var username = $("#Username").val();
-                var password = $("#Password").val();
-
-                if (username == null || username == "") {
-                    alert(alertNotice);
-                    $("#Username").focus();
-                }
-                
-                else if (password == null || password == "") {
-                    alert(alertNotice);
-                    $("#Password").focus();
-                }
-
-                else {
-                    
-                    $.post("process.login.php", {
-                        username: username,
-                        password: password
-                    }, function(data,status) {                      
-                    
-						if(status == "success"){                          
-							
-                        window.location = "personalDash.php";
-                        
-                        
-						} 
-                    })
-                }
-            });
-
 
     </script>

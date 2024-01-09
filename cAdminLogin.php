@@ -1,8 +1,26 @@
+
+<?php include("header.php"); ?> 
+  
+<?php 
+    include("connCheck.php");
+    if (isset($_GET['status']) && $_GET['status'] == 'disabled'){
+      
+     ?>  
+     
+     <div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
+                    <h3>Your Company has not been verified</h3>
+                    <p>Check your email for a verification link or contact us at superphishalteam@email.com</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  
+     <?php }
+
+
+     ?>
 <div class="container-fluid">
     <div class="col-sm-4 my-4">
         <div class="card">
             <div class="card-header mx-6">
-                                Login Company Account
+                                Login Existing Company Admin Account
 
             </div>
                 <div class="card-body">
@@ -17,29 +35,23 @@
                                     
                     </div>
 
-                    <div class="form-group my-3 mx-2">
-                        <button type="button" id="BtnCLogin" class="btn btn-primary btn-block">Login</button>
-                        <span class="float-end">Don't have an account? <a href="registration.php">Click here to Register</a>   </span>
+                    <div class="form-group py-2">
+                        <button type="button" id="BtnLogin" class="btn btn-primary btn-block">Login</button>
                                     
                     </div>
                 </div>
-            </div>   
-            <div class="alert alert-primary my-3"> <!--blue (primary) alert box-->
-                    <h3>Want to Register your company for Superphishal?</h3>
-                    <a href="companyRegistration.php" class="link-danger link-underline-opacity-25">Register the Company here</a>
-            </div>     
-            <div class="alert alert-danger my-3"> <!--red (danger) alert box-->
-                    <h3>Company already Registered?</h3>
-                    <a href="cAdminLogin.php" class="link-primary link-underline-opacity-25">Manage your Registered Company here</a>
             </div>        
     </div>
 
 </div>
+        <?php 
+        include("footer.php"); 
+        ?> 
 
             
             <script language="javascript">
 		
-        $("#BtnCLogin").on("click", function() {
+        $("#BtnLogin").on("click", function() {
                 
             var alertNotice = "Fields marked with * are required.";
             
@@ -47,7 +59,7 @@
                 var email = $("#Email").val();
                 var password = $("#Password").val();
 
-                if (Email == null || Email == "") {
+                if (email == null || email == "") {
                     alert(alertNotice);
                     $("#Email").focus();
                 }
@@ -59,17 +71,18 @@
 
                 else {
                     
-                    $.post("process.companyAccLogin.php", {
+                    $.post("process.cadminLogin.php", {
                         email: email,
                         password: password
                     }, function(data,status) {                      
                     
-						if(status == "success"){                          
-							
-                        window.location = "companyDash.php";
+						if(status == "success"){    
+                            alert("Logged in successfully");                      
+						
+                        window.location = "cadminDashboard.php";
                         
                         
-						} else{alert("Wrong Credentials");}
+						} 
                     })
                 }
             });

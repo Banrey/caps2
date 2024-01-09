@@ -5,50 +5,43 @@ if(!file_exists("connect.php")){
 }
 include("connect.php");
 
-
-if (@$_GET["action"] == "guestlogin"){
-    session_start();
-    $_SESSION['session_id'] = session_id();
-    $_SESSION['accID'] = "";
-    $_SESSION['email_address'] = "guest";
-    $_SESSION['username'] = "guest";
-    $_SESSION['accType'] =  "personal";
-    $_SESSION['dateCreated'] = "guest";                
-    $_SESSION['status'] = 1;
-
-}
-
 $sql_check = "SELECT COUNT(accID) AS ctr, 
-    accID, email, username, accType, dateCreated
+    accID, email, username, accType, dateCreated, status
 FROM 
     tblusers 
 WHERE   
-    username = ? AND password = ?";
+    email = ? AND password = ?" ;
     
     if ($statement_check = mysqli_prepare($conn, $sql_check)){
-        mysqli_stmt_bind_param($statement_check, "ss", $username, $password);
+        mysqli_stmt_bind_param($statement_check, "ss", $email, $password);
         
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = md5($_POST['password']);
         mysqli_stmt_execute($statement_check);
         
-        mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate);
+        mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $status);
         while(mysqli_stmt_fetch($statement_check)){
             if($ctr == 1){
+                if ($status == 'disabled') {
+                    
+            header("location: index.php?status=".$status);
+                }
+                else{
                 session_start();
                 $_SESSION['session_id'] = session_id();
                 $_SESSION['accID'] = $accID;
                 $_SESSION['email_address'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['accType'] = $accType;
-                $_SESSION['dateCreated'] = $accDate;                
-                $_SESSION['status'] = 1;
+                $_SESSION['dateCreated'] = $accDate;   
+                $_SESSION['status'] = $status;
                 
-                echo  $ctr. $accID. $email. $accDate; 
+            header("location: personalDash.php");
+        }
+                
                
             }  else{
-                $_SESSION['session_id'] = "";
-                $_SESSION['status'] = 0;
+                header("location: index.php?login=failed");
             }
         }
     }
