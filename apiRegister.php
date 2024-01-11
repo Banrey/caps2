@@ -43,9 +43,11 @@ $sql_insert = "INSERT INTO tblusers
                 $username = $_REQUEST["username"];
                 $password = md5($_REQUEST["password"]);
 				mysqli_stmt_execute($statement);
+                //execute sql statement
                 $response["success"] = 1;
-                $response["message"] = "DATA INSERTED";
+                $response["message"] = "Registered Successfully";
                 die(json_encode($response));
+                //encode data into json
 
         
 				

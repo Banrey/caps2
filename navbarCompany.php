@@ -47,6 +47,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="myPosts.php" class="nav-link link-dark align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">My Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="friendslist.php" class="nav-link link-dark align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Friends</span>
                         </a>

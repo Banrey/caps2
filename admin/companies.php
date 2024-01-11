@@ -8,24 +8,30 @@ if(!file_exists("../connect.php")){
 include("../connect.php");
 
 $txt_id = "";
-$txt_title = "";
-$txt_content = "";
+$txt_username = "";
+$txt_email = "";
+$txt_vcode = "";
+$txt_status = "";
+
 if (@$_GET["action"] == "update"){
-	$sql_cat = "SELECT  postID, title, content FROM posts WHERE postID = ?";
+	$sql_cat = "SELECT  cadminID, username, email, verificationCode, status FROM tblcompanyadmin WHERE cadminID = ?";
 
     if ($cat_check = mysqli_prepare($conn, $sql_cat)){
         mysqli_stmt_bind_param($cat_check, "i", $id,);
         
-        $id = $_GET['postID'];
+        $id = $_GET['cadminID'];
 
         mysqli_stmt_execute($cat_check);
         
-        mysqli_stmt_bind_result($cat_check, $ID, $category, $description);
+        mysqli_stmt_bind_result($cat_check, $ID, $username, $email, $verificationCode, $status);
         while(mysqli_stmt_fetch($cat_check)){
 			
            $txt_id = $ID;
-		   $txt_title = $category;
-		   $txt_content = $description;
+		   $txt_username = $username;
+		   $txt_email = $email;
+		   $txt_vcode = $verificationCode;
+		   $txt_status = $status;
+		   
             
         }
     }
@@ -40,19 +46,45 @@ if (@$_GET["action"] == "update"){
     <div class="row overflow-auto p-2" style="max-height: 500px;">
         <div class="col-sm-12 ">
 			<div class="row">
-				<h3>Posts</h3>
+				<h3>Company Admin Accounts</h3>
 				<div class="col-sm-5 ">
 					<div class="form-group">
-										<label>Title</label>   
-										<input value="<?php echo $txt_title; ?>" type="text" id="title" class="form-control rounded" placeholder="Title" > 
+										<label>Admin ID</label>   
+										<input value="<?php echo $txt_id; ?>" type="text" id="cadminID" class="form-control rounded" placeholder="Title" disabled> 
 									
 					</div>
             	</div>
 
 				<div class="col-sm-5 ">
 					<div class="form-group">
-											<label>Content</label>   
-											<input value="<?php echo $txt_content; ?>" type="text" id="content" class="form-control rounded" placeholder="Content" > 
+											<label>Username</label>   
+											<input value="<?php echo $txt_username; ?>" type="text" id="username" class="form-control rounded" placeholder="Content"  disabled> 
+										
+					</div>
+				</div>	
+
+				<div class="col-sm-5 ">
+					<div class="form-group">
+											<label>E-mail</label>   
+											<input value="<?php echo $txt_email; ?>" type="text" id="email" class="form-control rounded" placeholder="Content" disabled > 
+										
+					</div>
+				</div>	
+				
+				<div class="col-sm-5 ">
+					<div class="form-group">
+											<label>Verification Code</label>   
+											<input value="<?php echo $txt_vcode; ?>" type="text" id="verificationCode" class="form-control rounded" placeholder="Verification Code" disabled > 
+										 </select>
+										
+					</div>
+				</div>	
+
+				<div class="col-sm-5 ">
+					<div class="form-group">
+											<label>Status</label>   
+											<input value="<?php echo $txt_status; ?>" type="text" id="verificationCode" class="form-control rounded" placeholder="Verification Code" disabled >
+										 </select>
 										
 					</div>
 				</div>	
@@ -60,7 +92,7 @@ if (@$_GET["action"] == "update"){
 				<div class="col-sm-2 float-end">
 					<div class="form-group">
 						<input type="hidden" value="<?php echo $txt_id; ?>" id="id" >
-						<button type="button" id="BtnPost" class="btn btn-warning btn-block">Save Post</button>
+						<button type="button" id="BtnPost" class="btn btn-warning btn-block">Verify</button>
 										
 					</div>
             	</div>
@@ -72,39 +104,41 @@ if (@$_GET["action"] == "update"){
 				<table border="1" class="table table-striped">
 					<thead>
 						<tr> 
-							<td width= "15%">Action</td>
-							<td width= "12%">Post ID</td>
-							<td width= "12%">Account ID</td>
-							<td width= "20%">Title</td>
-							<td width= "20%">Content</td>
+							<td width= "10%">Action</td>
+							<td width= "10%">Admin ID</td>
+							<td width= "20%">Username</td>
+							<td width= "20%">E-mail</td>
+							<td width= "25%">Verification Code</td>							
+							<td width= "15%">Status</td>
 						</tr>
 					</thead>
 					<tbody>
 						<?php $ctr = 0; ?>
 						<?php $sql_post = "
 						SELECT 
-							*
-						FROM posts
+							cadminID, username, email, verificationCode, status
+						FROM tblcompanyadmin
 							" ?>
 						<?php $qry_post = mysqli_query($conn, $sql_post); ?>
 						<?php while($get_post = mysqli_fetch_array($qry_post)){ ?>
 						<?php $ctr++; ?>
 						<tr class="overflow-auto">
-							<td> <a href="posts.php?action=update&postID=<?php echo $get_post["postID"] ?>"> 
-							Update</a> /
-							<a href="process.posts.php?action=delete&postID=<?php echo $get_post["postID"] ?>">
-							Delete</a>
+							<td> <a href="companies.php?action=update&cadminID=<?php echo $get_post["cadminID"] ?>"> 
+							Select</a> /
+							<a href="process.companies.php?action=delete&cadminID=<?php echo $get_post["cadminID"] ?>">
+							Reject</a>
 							</td>
-							<td><?php echo $get_post["postID"] ?></td>
-							<td><?php echo $get_post["accID"] ?></td>
-							<td><?php echo $get_post["title"] ?></td>
-							<td><?php echo $get_post["content"] ?></td>
+							<td><?php echo $get_post["cadminID"] ?></td>
+							<td><?php echo $get_post["username"] ?></td>
+							<td><?php echo $get_post["email"] ?></td>
+							<td><?php echo $get_post["verificationCode"] ?></td>
+							<td><?php echo $get_post["status"] ?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan = "3">Total Posts :<?php echo $ctr; ?></td>
+							<td colspan = "3">Total Accounts :<?php echo $ctr; ?></td>
 						</tr>
 					</tfoot>
 				</table>
@@ -120,27 +154,30 @@ if (@$_GET["action"] == "update"){
             var alertNotice = "Fields marked with * are required.";
             
 
-                var txtTitle = $("#title").val();
-                var $txt_content = $("#content").val();
-                var txtID = $("#id").val();
+				var txt_cadminID = $("#cadminID").val();
+                var txt_username = $("#username").val();
+                var txt_email = $("#email").val();
+                var txt_verificationCode = $("#verificationCode").val();
+                var txt_status = "enabled";
 				
 
-                if (txtTitle == null || txtTitle == "") {
+                if (txt_cadminID == null || txt_cadminID == "") {
                     alert(alertNotice);
-                    $("#category").focus();
+                    $("#cadminID").focus();
                 }
                 
 
                 else {
                     
-                    $.post("process.posts.php", {
-                        title: txtTitle,
-                        content: $txt_content,
-                        postID: txtID
+                    $.post("process.companies.php", {
+                        cadminID: txt_cadminID,
+                        status: txt_status,
+                        email: txt_email,
+                        verificationCode: txt_verificationCode
                     }, function(data,status) {
                         
 						if(status == "success"){
-                        window.location = "posts.php";
+                        window.location = "companies.php";
 						}
                     })
                 }

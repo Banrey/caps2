@@ -1,3 +1,6 @@
+<?php include('header.php');
+
+include("connCheck.php"); ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 text-center"></div>
@@ -54,7 +57,7 @@
                             </div>
 
                             <div class="form-group py-2">
-                                <button type="button" id="BtnCReg" class="btn btn-primary btn-block">Reg</button>
+                                <button type="button" id="BtnCReg" class="btn btn-primary btn-block">Register</button>
                                 
                             </div>
                         </div>

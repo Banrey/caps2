@@ -22,7 +22,8 @@ try {
 	
 	$mail->isHTML(true);								 
 	$mail->Subject = 'Account Verification';
-	$mail->Body = 'Your Admin account for Superphishal has been validated. Please click the link to enter the Login page <p> <a href="http://localhost/Activities/caps2/cAdminLogin.php?vcode='.$verificationCode.'">Verify Your account here </a></p>';
+	$mail->Body = 'Please click the link to verify your Superphishal account <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$_GET['verificationCode'].'">Verify Your account here </a></p>';
+	$mail->AltBody = 'Body in plain text for non-HTML mail clients';
 	$mail->send();
 	echo "Mail has been sent successfully!";
 } catch (Exception $e) {

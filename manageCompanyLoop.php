@@ -1,30 +1,4 @@
-
-<?php
-session_start(); 
-include("connCheck.php");
-
- include("header.php"); 
-
-if (empty($_SESSION['status']) || $_SESSION['status'] == 'disabled') {
-       
-    header("location: cAdminLogin.php?status=disabled");
-    exit(); 
- }
- else {                
-        if(empty(session_id())){
-        include("navbarHead.php");
-        } else{include("navbarLogged.php");}
-}
-?>
-
-<div class="container">
-<div class="col-sm-4 my-4">
-                <div class="card mx-auto">
-                        <div class="card-header mx-6">
-                            Manage your company 
-
-                        </div>
-                          
+  
 <?php 
 $sql_cadmin = "SELECT companyID, companyName
     FROM
@@ -59,7 +33,7 @@ $sql_cadmin = "SELECT companyID, companyName
             
 
         
-<div class="col-sm-9 mx-auto my-4">
+<div class="col-sm-4 my-4">
                 <div class="card mx-auto">
                         <div class="card-header mx-6">
                             Registration Requests 
@@ -69,7 +43,7 @@ $sql_cadmin = "SELECT companyID, companyName
                 </div>        
         </div>
 
-<div class="col-sm-9 mx-auto my-4">
+<div class="col-sm-4 my-4">
                 <div class="card mx-auto">
                         <div class="card-header mx-6">
                             Registered Users 
@@ -85,18 +59,3 @@ $sql_cadmin = "SELECT companyID, companyName
         }?>
 
             
-                </div>        
-        </div>
-
-<?php
-
-
-
-
-?>
-
-<?php
-
-include("navbarfoot.php");
- include("footer.php"); 
-?>

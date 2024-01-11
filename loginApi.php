@@ -1,8 +1,10 @@
 <?php
 require("connect.php");
-$sql = "SELECT * FROM tblusers WHERE ". $_REQUEST["code"] ;
-
-$select_sql = "SELECT * FROM tblusers";
+$emailCV = $_REQUEST["email"];
+str_replace("@","_",$emailCV);
+$passwordCV = $_REQUEST["password"];
+$sql = "SELECT accID, email, username, accType, dateCreated FROM tblusers WHERE password = ".$passwordCV." AND email LIKE ".$emailCV;
+$select_sql = "SELECT accID, email, username, accType, dateCreated FROM tblusers";
 $sql = str_replace("\\", "", $sql);
 $select_sql = str_replace("\\", "", $select_sql);
 try {
@@ -14,7 +16,7 @@ try {
             $response["message"] = "DATA EXISTS";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            $stmt->bind_result($accID, $email, $username, $password,$accType,$dateCreated);                                                         
+            $stmt->bind_result($accID, $email, $username, $accType, $dateCreated);                                                         
             
 
             while($stmt->fetch()){
