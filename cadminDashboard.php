@@ -1,37 +1,46 @@
-
 <?php
 session_start(); 
 include("connCheck.php");
 
  include("header.php"); 
 
-if (empty($_SESSION['status']) || $_SESSION['status'] == 'disabled') {
-       
+ if($_SESSION["status"] == "enabled"){
+    
+$sql_cadmin = "SELECT companyID, companyName
+FROM
+tblcompanynames
+WHERE cadminID =".$_SESSION["cadminID"];
+
+ }elseif ($_SESSION["status"] == "disabled") {
     header("location: cAdminLogin.php?status=disabled");
-    exit(); 
  }
- else {                
-        if(empty(session_id())){
-        include("navbarHead.php");
-        } else{include("navbarLogged.php");}
-}
+ else{
+    header("location: cAdminLogin.php?status=nologin");
+ }
+
+ 
+                        
+                        ?>    
+                        <?php
+                        $qry_cadmin = mysqli_query($conn, $sql_cadmin);
+                        while($get_cadmin = mysqli_fetch_array($qry_cadmin)){ 
+
+                        $_SESSION['companyID'] = $get_cadmin["companyID"];
+                        }
+
+
+                        include("navbarCompany.php");
 ?>
 
 <div class="container">
-<div class="col-sm-4 my-4">
+<div class="col-sm-8 my-4">
                 <div class="card mx-auto">
                         <div class="card-header mx-6">
                             Manage your company 
 
                         </div>
                           
-<?php 
-$sql_cadmin = "SELECT companyID, companyName
-    FROM
-    tblcompanynames
-    WHERE cadminID =".$_SESSION['cadminID'].";"
-                            
-                            ?>    
+
                                         
         <?php $qry_cadmin = mysqli_query($conn, $sql_cadmin);
         if(mysqli_num_rows($qry_cadmin) == 0){
@@ -48,7 +57,7 @@ $sql_cadmin = "SELECT companyID, companyName
             <div class="col-md-9 card my-3 mx-auto">
                 <div class="card-body">
                     
-            <?php echo $get_cadmin["companyName"]; $_SESSION['companyID'] = $get_cadmin["companyID"];?> 
+            <?php echo $get_cadmin["companyName"];?> 
             <a href=<?php echo "companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=accept"?>>Details  </a>
             <a href=<?php echo "process.companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=delete"?>>Delete</a>
 

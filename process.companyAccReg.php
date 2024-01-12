@@ -5,17 +5,20 @@ if(!file_exists("connect.php")){
 }
 include("connect.php");
 
-$sql_check = "SELECT count(accID) AS ctr FROM tblusers WHERE email = ?";
+$sql_check = "SELECT count(accID) AS ctr FROM tblusers WHERE email LIKE ?";
 if ($statement_check = mysqli_prepare($conn, $sql_check)){
 	mysqli_stmt_bind_param($statement_check, "s", $email_address);
 	
 	$email_address = $_POST['email_address'];
+    
+    str_replace("@","_",$email_address);
 	mysqli_stmt_execute($statement_check);
 	
 	mysqli_stmt_bind_result($statement_check, $ctr);
 	while(mysqli_stmt_fetch($statement_check)){
 		if($ctr > 0){
             echo "Email already registered";
+            header("location: companyAccReg.php?status=registered");
 			exit();
 		}
 	}

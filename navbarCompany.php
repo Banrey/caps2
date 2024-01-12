@@ -4,14 +4,14 @@
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark min-vh-100">
                 <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline"><?php 
-                                                                if (empty($_SESSION['accID'])) {
+                                                                if (empty($_SESSION['session_id'])) {
                                                                     echo 'no session id';
 
                                                                 }
                                                                 else{?>
                                                                 <p id="accID"> 
                                                                     <?php 
-                                                                        if(empty($_SESSION['accID'])){
+                                                                        if(empty($_SESSION['accID']) && empty($_SESSION['cadminID'])){
                                                                             echo 'Logged in as Guest';
                                                                         } else {
                                                                             echo 'Logged in as '.$_SESSION['username'];

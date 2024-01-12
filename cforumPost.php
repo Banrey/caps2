@@ -33,7 +33,7 @@
                 <!--Comments go here-->
                 <?php $sql_comment = "
                             SELECT co.commentID, co.postID, co.accID, co.message, co.rating, us.username 
-                            FROM comments AS co 
+                            FROM companycomments AS co 
                             JOIN tblusers AS us ON co.accID = us.accID
                             WHERE co.postID = ".$get_posts["postID"]							
                             ?>      

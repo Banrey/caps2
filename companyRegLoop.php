@@ -11,7 +11,7 @@ $sql_cadmin = "SELECT username, email
             
             ?>
             <div class="col-md-12 card my-3 mx-auto">
-            <div class="card-body"><a href="createCompany.php"><?php  echo "No Registered Users";?></a></div></div>
+            <div class="card-body"><?php  echo "No Registered Users";?></div></div>
             <?php 
          }
          else{
@@ -23,8 +23,7 @@ $sql_cadmin = "SELECT username, email
                     
             <?php echo $get_cadmin["username"]; ?> 
             <?php echo $get_cadmin["email"]; ?> 
-            <a href=<?php echo "companyDetails.php?companyID=".$get_cadmin["email"]."&action=accept"?>>Details  </a>
-            <a href=<?php echo "process.companyDetails.php?companyID=".$get_cadmin["email"]."&action=delete"?>>Delete</a>
+            <a href=<?php echo "verifyCompanyAccount.php?email=".$get_cadmin["email"]."&action=delete"?>>Remove User From Company</a>
 
                 </div>
 

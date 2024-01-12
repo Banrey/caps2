@@ -130,8 +130,7 @@ buttons.forEach(function(button) {
                         message: message,
                         postID: postID
                     }, function(data,status) {
-						if(status == "success"){
-                        alert("Commented Successfully");      
+						if(status == "success"){   
                         textarea.value="";      
 						}
                     })

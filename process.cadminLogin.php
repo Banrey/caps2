@@ -35,7 +35,7 @@ WHERE
                
             }  else{
                 $_SESSION['session_id'] = "";
-                $_SESSION['status'] = 0;
+                $_SESSION['status'] = "nologin";
                 //error handling
                 echo  $ctr. $cID. $email. $user."fail"; 
             }

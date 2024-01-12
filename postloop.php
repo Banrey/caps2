@@ -41,7 +41,9 @@ $sql_posts = "SELECT postID, title, content, status, datePosted
                             ?>      
         <?php $qry_comment = mysqli_query($conn, $sql_comment); ?>
 		<?php if (mysqli_fetch_array($qry_comment) > 0) {
-            while($get_comment = mysqli_fetch_array($qry_comment)){ ?>
+            
+         $qry_comment = mysqli_query($conn, $sql_comment); 
+            while($get_comment = mysqli_fetch_array($qry_comment)) { ?>
                 <div class="card col-12 px-2 overflow-auto">
                     <h6><?php echo $get_comment["username"] ?></h6>
                    
@@ -56,7 +58,7 @@ $sql_posts = "SELECT postID, title, content, status, datePosted
             <div style="height: 50px;" class="card-body">
                     <p><?php echo "No comments for this post" ?></p>   
                 </div>
-        <?php }?>
+        <?php } ?>
             </div>
         </div>            
     </div>

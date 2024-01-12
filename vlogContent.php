@@ -46,7 +46,7 @@ include("header.php");
                 <div class="card h-22">                  
                     <div class="card-body">                        
                         <textarea class="form-control" placeholder="insert comment here" name="comment" id="comment" ></textarea>                    
-                        <button type="button" onclick="comment(this)" <?php echo 'id="BtnComment'.$get_vlogs["vlogID"]."\"".' name ="'.$get_vlogs["vlogID"]."\"" ?> class="float-end btn btn-primary mt-3 mx-auto">Comment</button>                    
+                        <button type="button" onclick="comment(this)" <?php echo 'id="BtnComment'.$get_vlogs["vlogID"]."\"".' name ="'.$get_vlogs["vlogID"]."\"" ?> class="float-end btn btn-primary btncmnt mt-3 mx-auto">Comment</button>                    
                     </div>
                     
                 </div>
@@ -83,32 +83,116 @@ include("header.php");
     
 
 
+
+
 <script lang="javascript">
-function comment(button){
+    
+    var conn = new WebSocket('ws://localhost:8080');
+    var comment_data;
+    
+ $(document).ready(function () {
+		conn.onopen = function(e) {
+		    console.log("Connection established!");
+		};
+
+        conn.onmessage = function(e) {
+        //console.log(e.data);
+
+        var data = JSON.parse(e.data);
+
+        let idTxt = '#'.concat('comment_container',data.vlogID); 
+
+        let html_data = `<div class="card col-12 px-2 overflow-auto">
+                <h6>${data.username}</h6>
+               
+                <div style="height: 50px;">
+                        <p>${data.message}</p>   
+                    </div>
+            </div>`;
+        
+        $(idTxt).append(html_data);
+        };
+
+ });
+
+const buttons = document.querySelectorAll(".btn");
+
+// loop through each button and add a click event listener
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    event.preventDefault();
+    // do something when the button is clicked
+    
+    alertNotice = "Invalid Input";
     textarea = button.previousElementSibling
     message = textarea.value     
-    
-    
     vlogID = button.getAttribute("name")
+    username = <?php if (isset($_SESSION['username'])) {
+        echo '"'.$_SESSION['username'].'"';
+    } 
+    else {echo '"guest"';}?>
+
+    
+    var comment = {
+        message: message,
+        vlogID: vlogID,
+        username: username        
+    }
+    console.log(JSON.stringify(comment));
+    comment_data = JSON.stringify(comment);
+    let idTxt = '#'.concat('comment_container',vlogID); 
+
+        let html_data = `<div class="card col-12 px-2 overflow-auto">
+                <h6>${username}</h6>
+               
+                <div style="height: 50px;">
+                        <p>${message}</p>   
+                    </div>
+            </div>`;
+        
+        $(idTxt).append(html_data);
+        
+
     if (message == null || message == "") {
                     alert(alertNotice);
-                    $(txtArea).focus();
+                    $(textarea).focus();
                 }
 
     else{
+
         $.post("process.vcomment.php", {
                         message: message,
                         vlogID: vlogID
                     }, function(data,status) {
-						if(status == "success"){
-                        alert("Commented Successfully");                                            
-                        window.location = "vlog.php";
+						if(status == "success"){   
+                        textarea.value="";      
 						}
                     })
     }  
-}
-
+        });
+    });
 
     
+    $('.btncmnt').on('click', function () {
+    
+    conn.send(comment_data);
+    
+    var data = JSON.parse(comment_data);
+
+let idTxt = '#'.concat('comment_container',data.vlogID); 
+$(idTxt).scrollTop($(idTxt)[0].scrollHeight);
+
+
+ });
+
+ $('#BtnPost').on('click', function () {
+    
+    window.location = "company_post.php";
+
+
+ });
+
+
+
 </script>
 

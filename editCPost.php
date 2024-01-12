@@ -16,7 +16,7 @@ include("connCheck.php");
 <?php $sql_posts = "
                             SELECT title, content, datePosted, status
                             FROM
-                            posts 
+                            companyposts 
                             WHERE postID =".$_GET['postID'];			
                             ?> 
 
@@ -74,7 +74,7 @@ include("connCheck.php");
                 <!--Comments go here-->
                 <?php $sql_comment = "
                             SELECT co.commentID, co.postID, co.accID, co.message, co.rating, us.username 
-                            FROM comments AS co 
+                            FROM companycomments AS co 
                             JOIN tblusers AS us ON co.accID = us.accID
                             WHERE co.postID = ".$_GET["postID"]							
                             ?>      
@@ -179,7 +179,7 @@ include("connCheck.php");
 
                 else {
                     
-                    $.post("process.editPost.php", {
+                    $.post("process.editCPost.php", {
                         title: title,
                         content: content,
                         status: status,
@@ -202,7 +202,7 @@ include("connCheck.php");
                 var rating = this.value;
                 alert(rating);
                 
-                $.post("process.editPost.php?action=rate", {
+                $.post("process.editCPost.php?action=rate", {
                         rating: rating,
                         commentID: commentID
 

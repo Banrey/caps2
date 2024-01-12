@@ -25,7 +25,7 @@ include("header.php");
                             ?>    
     <?php
             include("footer.php");
-            include("forumPost.php");
+            include("cforumPost.php");
             ?>
 </div>
 <!-- forum ends here -->
@@ -111,8 +111,7 @@ buttons.forEach(function(button) {
                         message: message,
                         postID: postID
                     }, function(data,status) {
-						if(status == "success"){
-                        alert("Commented Successfully");      
+						if(status == "success"){   
                         textarea.value="";      
 						}
                     })

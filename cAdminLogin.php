@@ -25,6 +25,16 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
        </div>  
 <?php }?>
+
+<?php
+if (isset($_GET['status']) && $_GET['status'] == 'nologin'){
+?>  
+
+<div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
+               <h3>Wrong Credentials</h3>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>  
+<?php }?>
 <div class="container-fluid">
     <div class="col-sm-4 my-4">
         <div class="card">
@@ -32,22 +42,25 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
                                 Login Existing Company Admin Account
 
             </div>
-                <div class="card-body">
-                    <div class="form-group required">
+                <div class="card-body">                    
+                <form id="register_form" method="post" > 
+                <div class="form-group required">
                         <label>Email*</label>   
-                        <input type="text" id="Email" class="form-control rounded" placeholder="Email" > 
+                        <input type="email" id="Email" name="email_address" class="form-control rounded" placeholder="E-mail" required> 
                     </div>
 
                     <div class="form-group required">
                         <label>Password*</label>   
-                        <input type="password" id="Password" class="form-control rounded" placeholder="Password" > 
+                        <input type="password" id="Password" name="password" class="form-control rounded" placeholder="Password" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z0-9\s]+$/" required> 
                                     
                     </div>
 
+
                     <div class="form-group py-2">
-                        <button type="button" id="BtnLogin" class="btn btn-primary btn-block">Login</button>
-                                    
-                    </div>
+                                <input type="submit" name="register" id="BtnLogin" class="btn btn-primary" value="Login">
+                            </div>
+                </form>
+                    
                 </div>
             </div>        
     </div>
@@ -59,42 +72,38 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
 
             
             <script language="javascript">
-		
-        $("#BtnLogin").on("click", function() {
                 
-            var alertNotice = "Fields marked with * are required.";
+        $(document).ready(function(){
+
+        $('#register_form').parsley();
+
+        });
+
             
-
-                var email = $("#Email").val();
-                var password = $("#Password").val();
-
-                if (email == null || email == "") {
-                    alert(alertNotice);
-                    $("#Email").focus();
-                }
+$('#register_form').parsley().on('form:submit', function() {
                 
-                else if (password == null || password == "") {
-                    alert(alertNotice);
-                    $("#Password").focus();
-                }
-
-                else {
+                var alertNotice = "Fields marked with * are required.";
+                
+    
+                    var email = $("#Email").val();
+                    var password = $("#Password").val();
+    
                     
-                    $.post("process.cadminLogin.php", {
-                        email: email,
-                        password: password
-                    }, function(data,status) {                      
-                    
-						if(status == "success"){    
-                            alert("Logged in successfully");                      
-						
-                        window.location = "cadminDashboard.php";
                         
+                        $.post("process.cadminLogin.php", {
+                            email: email,
+                            password: password
+                        }, function(data,status) {                      
                         
-						} 
-                    })
-                }
-            });
-
+                            if(status == "success"){                        
+                            
+                            window.location = "cadminDashboard.php";
+                            
+                            
+                            }
+                        })
+});
+		
 
     </script>
+
