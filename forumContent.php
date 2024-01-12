@@ -2,17 +2,15 @@
 include("header.php");
 ?>
 <!-- forum starts here -->
-<div id="post_container">
+<div id="post_container" class="d-inline-block col-12">
     
     <div class="container mb-2">
 <h1>Welcome to Superphishal</h1>
-        <?php if (!empty($_SESSION['username'])) {?>
             
             <a href="post_form.php">
         
         <button type="button" id="BtnPost" class="btn btn-primary mt-3 mx-auto">New Post</button>
     </a>
-       <?php }?>
 
 
 
@@ -43,6 +41,10 @@ include("header.php");
                             
     <?php
             include("forumPost.php");
+            
+            
+            include("navbarfoot.php");
+            
             include("footer.php");
             ?>
 </div>

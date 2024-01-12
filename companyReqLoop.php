@@ -23,8 +23,9 @@ $sql_cadmin = "SELECT username, email
                     
             <?php echo $get_cadmin["username"]; ?> 
             <?php echo $get_cadmin["email"]; ?> 
-            <a href=<?php echo "verifyCompanyAccount.php?email=".$get_cadmin["email"]."&action=accept"?>>Verify User  </a>
-            <a href=<?php echo "verifyCompanyAccount.php?email=".$get_cadmin["email"]."&action=delete"?>>Delete</a>
+
+            <button class="btn btn-primary btnv mx-3" id=<?php echo $get_cadmin["email"]?>>Verify User  </button>
+            <button class="btn btn-danger btnv" id=<?php echo $get_cadmin["email"]?> name="delete">Delete</button>
 
                 </div>
 
@@ -32,3 +33,5 @@ $sql_cadmin = "SELECT username, email
             
             
             <?php } }?>
+
+            

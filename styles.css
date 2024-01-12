@@ -1,0 +1,8 @@
+div.sticky {
+    position: sticky;
+    right: 0;
+  }
+
+.jcSb{
+  justify-content: space-between;
+}

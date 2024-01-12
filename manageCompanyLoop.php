@@ -23,7 +23,7 @@ $sql_cadmin = "SELECT companyID, companyName
                 <div class="card-body">
                     
             <?php echo $get_cadmin["companyName"]; $_SESSION['companyID'] = $get_cadmin["companyID"];?> 
-            <a href=<?php echo "companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=accept"?>>Details  </a>
+            <a href=<?php echo "editCompany.php?companyID=".$get_cadmin["companyID"]."&action=accept"?>>Details  </a>
             <a href=<?php echo "process.companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=delete"?>>Delete</a>
 
                 </div>

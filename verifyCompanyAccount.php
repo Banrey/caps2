@@ -1,11 +1,11 @@
 <?php
 include("connCheck.php");
 
-if (@$_GET["action"] == "delete"){
+if (@$_POST["action"] == "delete"){
 	$sql_delete = "DELETE FROM tblusers WHERE email LIKE ?";
 	if ($delete_check = mysqli_prepare($conn, $sql_delete)){
 		mysqli_stmt_bind_param($delete_check, "s", $email_address);
-		$email_address = $_GET["email"];
+		$email_address = $_POST["email"];
         str_replace("@","_",$email_address);
 
 		mysqli_stmt_execute($delete_check);
@@ -51,7 +51,7 @@ if ($statement = mysqli_prepare($conn, $sql_update)) {
     mysqli_stmt_bind_param($statement, "ss",
         $status, $email_address);
 
-    $email_address = $_GET['email'];
+    $email_address = $_POST['email'];
     str_replace("@","_",$email_address);
     $status = "enabled";        
     

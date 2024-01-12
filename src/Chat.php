@@ -24,7 +24,7 @@ class Chat implements MessageComponentInterface {
 
             $data = json_decode($msg,true);
 
-            if($data['command'] == 'Private'){
+            if(isset($data["command"]) && $data['command'] == 'Private'){
 
                 foreach ($this->clients as $client) {
                     if ($from !== $client) {

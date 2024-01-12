@@ -1,13 +1,15 @@
 
 
 <link rel="stylesheet" type="text/css" href="rateNoHover.css">
+<div class="d-flex col-12 jcSb">
+<div class="col-8">
         <?php $qry_posts = mysqli_query($conn, $sql_posts); ?>
 		<?php while($get_posts = mysqli_fetch_array($qry_posts)){ ?>
 						
 
                     <!--Post contents-->    
     <div class="container mt-5">  
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <p class = "float-right"><?php echo "Posted ".$get_posts["datePosted"] ?></p>
@@ -105,8 +107,32 @@
         <?php } ?>
                             </div>
                         </div>
+                        
+					</div>
                         <?php } ?>
-            </div>
-        </div>            
-    </div>
+                        </div>
+                        <div class="col-md-4">     
+
+                        <div class="card d-inline-block col-12 my-3">
+                            <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+
+                            <div class="card d-inline-block col-12 my-3">
+                            <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        </div>
+                        
+                        
+            
     <!--One Entry-->

@@ -23,7 +23,7 @@ $sql_cadmin = "SELECT username, email
                     
             <?php echo $get_cadmin["username"]; ?> 
             <?php echo $get_cadmin["email"]; ?> 
-            <a href=<?php echo "verifyCompanyAccount.php?email=".$get_cadmin["email"]."&action=delete"?>>Remove User From Company</a>
+            <button class="btn btn-danger btnv my-3" id=<?php echo $get_cadmin["email"]?> name="delete">Delete User Account</button>
 
                 </div>
 
@@ -31,3 +31,32 @@ $sql_cadmin = "SELECT username, email
             
             
             <?php } }?>
+
+            
+            <script>
+                
+           
+const buttons = document.querySelectorAll(".btnv");
+
+// loop through each button and add a click event listener
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    event.preventDefault();      
+    
+    var action = this.name;
+    var email = this.id;
+    alert(action);
+    
+    $.post("verifyCompanyAccount.php", {
+        action: action,
+        email: email
+
+        }, function(data,status) {
+            if(status == "success"){
+            window.location = "cadminDashboard.php"
+            }
+        })
+
+});
+});
+            </script>
