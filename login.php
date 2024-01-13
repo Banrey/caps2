@@ -64,12 +64,7 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
             <div class="alert alert-primary my-3"> <!--blue (primary) alert box-->
                     <h3>Want to use Superphishal for work?</h3>
                     <a href="companyPortal.php" class="link-danger">->Enter the Company Portal here<-</a>
-            </div>     
-              
-            <div class="alert alert-primary my-3"> <!--blue (primary) alert box-->
-                    <h3>Want to try our app?</h3>
-                    <a href="appLogin.php" class="link-danger">->Enter the Company Portal here<-</a>
-            </div>      
+            </div>        
     </div>
 
 
