@@ -42,11 +42,14 @@ if (@$_GET["action"] == "update"){
     <div class="row overflow-auto p-2" style="max-height: 500px;">
         <div class="col-sm-12 ">
 			<div class="row">
-				<h3>Posts</h3>
+				<h3>Statistics</h3>
+				
+				<iframe name="empty" style="display:none;"></iframe>
+        <form method="POST" action="process.stats.php" enctype="multipart/form-data" id="update">
 				<div class="col-sm-5 ">
 					<div class="form-group">
 										<label>Title</label>   
-										<input value="<?php echo $txt_title; ?>" type="text" id="title" class="form-control rounded" placeholder="Title" > 
+										<input value="<?php echo $txt_title; ?>" name="title" type="text" id="title" class="form-control rounded" placeholder="Title" required > 
 									
 					</div>
             	</div>
@@ -54,7 +57,7 @@ if (@$_GET["action"] == "update"){
 				<div class="col-sm-5 ">
 					<div class="form-group">
 											<label>Content</label>   
-											<input value="<?php echo $txt_content; ?>" type="text" id="content" class="form-control rounded" placeholder="Content" > 
+											<input value="<?php echo $txt_content; ?>" name="content" type="text" id="content" class="form-control rounded" placeholder="Content" required> 
 										
 					</div>
 				</div>	
@@ -66,16 +69,18 @@ if (@$_GET["action"] == "update"){
                     <label>Image</label>  
                         <div class="card"> 
                             <?php if (empty($txt_image)) {?>
-                            <form >
-                            <input type="file" id="myFile" name="filename">
-                            <input type="submit">
-                            </form>
+                            <input type="file" id="uploadfile" name="uploadfile" required>
+                            
+							</div>
                            <?php } else {?>
 
-						    <img class="card-img-top" src="..." alt="..." width="300" height="200">
+						    <img class="card-img-top" src=<?php echo "../images/".$txt_image; ?> alt="..." width="300" height="200">
+							</div>
+                            <label for="myfile">Update Statistic Image:</label>
+							<input type="file" id="uploadfile" name="uploadfile" required>
                            <?php }?>
 
-                        </div>
+                        
 											
 										
 					</div>
@@ -83,10 +88,12 @@ if (@$_GET["action"] == "update"){
 				
 				<div class="col-sm-2 float-end">
 					<div class="form-group">
-						<input type="hidden" value="<?php echo $txt_id; ?>" id="id" >
-						<button type="button" id="BtnPost" class="btn btn-warning btn-block my-3">Save Statistic</button>
+						<input type="hidden" name="statID" value="<?php echo $txt_id; ?>" id="id" >
+						<input type="button" id="BtnPost" class="btn btn-warning btn-block my-3" value="Save Statistic">
 										
 					</div>
+
+			</form>
             	</div>
 			</div>
         </div>
@@ -107,20 +114,20 @@ if (@$_GET["action"] == "update"){
 						<?php $ctr = 0; ?>
 						<?php $sql_post = "
 						SELECT 
-							*
+							statID, image, title, content
 						FROM stats
 							" ?>
 						<?php $qry_post = mysqli_query($conn, $sql_post); ?>
 						<?php while($get_post = mysqli_fetch_array($qry_post)){ ?>
 						<?php $ctr++; ?>
 						<tr class="overflow-auto">
-							<td> <a href="stats.php?action=update&statID=<?php echo $get_post["postID"] ?>"> 
+							<td> <a href="stats.php?action=update&statID=<?php echo $get_post["statID"] ?>"> 
 							Update</a> /
-							<a href="process.stats.php?action=delete&statID=<?php echo $get_post["postID"] ?>">
+							<a href="process.stats.php?action=delete&statID=<?php echo $get_post["statID"] ?>">
 							Delete</a>
 							</td>
-							<td><?php echo $get_post["postID"] ?></td>
-							<td><?php echo $get_post["accID"] ?></td>
+							<td><?php echo $get_post["statID"] ?></td>
+							<td><img src="../images/<?php echo $get_post["image"]; ?>" height = "200"></td>
 							<td><?php echo $get_post["title"] ?></td>
 							<td><?php echo $get_post["content"] ?></td>
 						</tr>
@@ -139,37 +146,47 @@ if (@$_GET["action"] == "update"){
 
 
 <script language="javascript">
-        $("#BtnPost").on("click", function() {
-                
-            var alertNotice = "Fields marked with * are required.";
-            
 
-                var txtTitle = $("#title").val();
-                var $txt_content = $("#content").val();
-                var txtID = $("#id").val();
+	alertNotice = "All fields are required"
+	$(document).ready(function () {
 				
 
-                if (txtTitle == null || txtTitle == "") {
-                    alert(alertNotice);
-                    $("#category").focus();
-                }
+$( "#BtnPost" ).on( "click", function( event ) {
+  event.preventDefault();
+
+  
+  var title = $("#title").val();
+                var content = $("#content").val();
+                var image = $("#uploadfile").val();
+				
+
                 
 
-                else {
-                    
-                    $.post("process.stats.php", {
-                        title: txtTitle,
-                        content: $txt_content,
-                        postID: txtID
-                    }, function(data,status) {
-                        
-						if(status == "success"){
-                        window.location = "stats.php";
-						}
-                    })
+				if (image == null || image == "") {
+                    alert(alertNotice);
+                    $("#uploadfile").focus();
                 }
-            });
+				else if (title == null || title == "") {
+                    alert(alertNotice);
+                    $("#title").focus();
+                }
+				else if (content == null || content == "") {
+                    alert(alertNotice);
+                    $("#content").focus();
+                }
+				else{
+					
+				$('form#update').submit();
 
+				}
+
+
+
+  
+});
+				
+
+});
 
     </script>
 

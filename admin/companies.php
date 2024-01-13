@@ -92,7 +92,7 @@ if (@$_GET["action"] == "update"){
 				<div class="col-sm-2 float-end">
 					<div class="form-group">
 						<input type="hidden" value="<?php echo $txt_id; ?>" id="id" >
-						<button type="button" id="BtnPost" class="btn btn-warning btn-block">Verify</button>
+						<button type="button" id="BtnPost" class="btn btn-warning btn-block my-3">Verify</button>
 										
 					</div>
             	</div>

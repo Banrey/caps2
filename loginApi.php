@@ -8,7 +8,7 @@ include("connCheck.php");
 
 
 $sql_check = "SELECT COUNT(accID) AS ctr, 
-    accID, email, username, accType, dateCreated, status
+    accID, email, username, accType, dateCreated, status, password
 FROM 
     tblusers 
 WHERE   
@@ -23,7 +23,7 @@ WHERE
         $password = md5($_REQUEST['password']);
         mysqli_stmt_execute($statement_check);
         
-        mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $status);
+        mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $status, $password);
         while(mysqli_stmt_fetch($statement_check)){
             if($ctr == 1){
                 if ($status == 'disabled') {
@@ -44,7 +44,8 @@ WHERE
                 $response["username"] = $username;
                 $response["accType"] = $accType;
                 $response["dateCreated"] = $accDate;   
-                $response["status"] = $status;
+                $response["status"] = $status;   
+                $response["password"] = $password;
                 $response["message"] = $status;
                 die(json_encode($response));
                 

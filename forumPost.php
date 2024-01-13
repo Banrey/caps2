@@ -111,23 +111,30 @@
 					</div>
                         <?php } ?>
                         </div>
-                        <div class="col-md-4">     
+                        <div class="col-md-4" id="stats_contatiner">  
+                            
+                        <?php $sql_stat = "
+						SELECT 
+							statID, image, title, content
+						FROM stats
+							" ?>
+						<?php $qry_stat = mysqli_query($conn, $sql_stat); ?>
+						<?php while($get_stat = mysqli_fetch_array($qry_stat)){ ?>
 
                         <div class="card d-inline-block col-12 my-3">
-                            <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
+                            <img src=<?php 
+                            $imagename = "images/".$get_stat["image"];
+                            preg_replace('/\s+/', '_', $imagename);
+                            print_r($imagename)?>
+                            
+                            class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h5 class="card-title"><?php echo $get_stat["title"] ?></h5>
+                                    <p class="card-text"><?php echo $get_stat["content"] ?></p>
                                 </div>
                             </div>
 
-                            <div class="card d-inline-block col-12 my-3">
-                            <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
 

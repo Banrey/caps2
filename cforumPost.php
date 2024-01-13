@@ -1,13 +1,15 @@
 
 
 <link rel="stylesheet" type="text/css" href="rateNoHover.css">
+<div class="d-flex col-12 jcSb">
+<div class="col-8">
         <?php $qry_posts = mysqli_query($conn, $sql_posts); ?>
 		<?php while($get_posts = mysqli_fetch_array($qry_posts)){ ?>
 						
 
                     <!--Post contents-->    
     <div class="container mt-5">  
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <p class = "float-right"><?php echo "Posted ".$get_posts["datePosted"] ?></p>
@@ -105,9 +107,39 @@
         <?php } ?>
                             </div>
                         </div>
+                        
 					</div>
                         <?php } ?>
-            </div>
-        </div>            
-    </div>
+                        </div>
+                        <div class="col-md-4" id="stats_contatiner">  
+                            
+                        <?php $sql_stat = "
+						SELECT 
+							statID, image, title, content
+						FROM stats
+							" ?>
+						<?php $qry_stat = mysqli_query($conn, $sql_stat); ?>
+						<?php while($get_stat = mysqli_fetch_array($qry_stat)){ ?>
+
+                        <div class="card d-inline-block col-12 my-3">
+                            <img src=<?php 
+                            $imagename = "images/".$get_stat["image"];
+                            preg_replace('/\s+/', '_', $imagename);
+                            print_r($imagename)?>
+                            
+                            class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $get_stat["title"] ?></h5>
+                                    <p class="card-text"><?php echo $get_stat["content"] ?></p>
+                                </div>
+                            </div>
+
+                            <?php } ?>
+
+                        </div>
+
+                        </div>
+                        
+                        
+            
     <!--One Entry-->
