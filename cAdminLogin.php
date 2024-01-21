@@ -43,10 +43,10 @@ if (isset($_GET['status']) && $_GET['status'] == 'nologin'){
 
             </div>
                 <div class="card-body">                    
-                <form id="register_form" method="post" > 
+                <form id="register_form" method="post" action="cadminDashboard.php" > 
                 <div class="form-group required">
                         <label>Email*</label>   
-                        <input type="email" id="Email" name="email_address" class="form-control rounded" placeholder="E-mail" required> 
+                        <input type="email" id="Email" name="email" class="form-control rounded" placeholder="E-mail" required> 
                     </div>
 
                     <div class="form-group required">

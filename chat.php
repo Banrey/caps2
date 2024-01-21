@@ -122,16 +122,17 @@ include("navbarfoot.php"); ?>
                     if (message == null || message == "") {
                     alert(alertNotice);
                     $(chatBox).focus();
+                    
                 }
 
                     else{
+                        document.getElementById("messageContent").value = "";
                         $.post("process.chat.php", {
                             message: message,
                             receiveID: receiveID,
                             accID: accID
                     }, function(data,status) {
                             if(status == "success"){
-                                alert("Chatted Successfully"); 
                                 div = document.getElementById("chat_container");
                                 chat = document.createElement("div");
                                 chat.className = "card col-md-12 px-auto my-1 overflow-auto";

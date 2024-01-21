@@ -35,19 +35,19 @@ if(empty($_SESSION["accID"])){
             
                 <div class="small-img-row">
                         <iframe width="300" height="150"
-                        src="https://www.youtube.com/embed/nXoXo6H93WQ">
+                        src="https://www.youtube.com/embed/nXoXo6H93WQ" frameborder="0" allowfullscreen> 
                     </iframe>
                     <p> English Video</p>
                 </div>
                 <div class="small-img-row">
                         <iframe width="300" height="150"
-                        src="https://www.youtube.com/embed/5oUR9PJdnVM">
+                        src="https://www.youtube.com/embed/5oUR9PJdnVM" frameborder="0" allowfullscreen>
                     </iframe>
                     <p>Hiligaynon</p>
                 </div>
                 <div class="small-img-row">
                         <iframe width="300" height="150"
-                            src="https://www.youtube.com/embed/tfkpW4dJl20">
+                            src="https://www.youtube.com/embed/tfkpW4dJl20" frameborder="0" allowfullscreen>
                         </iframe>
                     <p>Tagalog Video</p>
                 </div>

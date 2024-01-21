@@ -12,12 +12,13 @@ cadminID, username, status
 FROM 
     tblcompanyadmin
 WHERE   
-    email = ? AND password = ?";
+    password = ? AND email LIKE ?";
     
     if ($statement_check = mysqli_prepare($conn, $sql_check)){
-        mysqli_stmt_bind_param($statement_check, "ss", $email, $pword);
+        mysqli_stmt_bind_param($statement_check, "ss", $pword, $email);
         
         $email = $_POST['email'];
+        str_replace("@","_",$email);
         $pword = md5($_POST['password']);
         mysqli_stmt_execute($statement_check);
         

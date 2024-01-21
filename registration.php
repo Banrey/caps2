@@ -110,7 +110,9 @@ $('#register_form').parsley();
                     }, function(data,status) {
 						if(status == "success"){                       
                 window.location = "index.php?status=registered";
-						}
+						} else{
+                            alert("something went wrong");
+                        }
                     })
   });
 

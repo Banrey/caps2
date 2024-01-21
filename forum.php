@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("connCheck.php");
+include("process.personalDash.php");
 
 ?>
 

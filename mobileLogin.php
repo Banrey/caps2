@@ -1,4 +1,8 @@
-<?php
+
+<?php 
+    include("header.php");       
+    include_once("connCheck.php");
+
 if (isset($_GET['status']) && $_GET['status'] == 'disabled'){
      ?>  
      
@@ -14,7 +18,7 @@ if (isset($_GET['login']) && $_GET['login'] == 'failed'){
      ?>  
      
      <div class="alert alert-danger alert-dismissible fade show my-3" role="alert"> <!--red (danger) alert box-->
-                    <h3>Wrong Credentials</h3>
+                    <h3>Wrong Login Code</h3>
                     <p>Please try again</p>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>  
@@ -46,29 +50,27 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
     <div class="col-sm-4 my-4">
         <div class="card">
             <div class="card-header mx-6">
-                                Login Existing Account
+                                Login Using Mobile App
 
             </div>
                 <div class="card-body">
-                    <form action="process.login.php" id="login_form" method="post">                    
-                <div class="form-group" >
-                                 <label class="required">Email *</label>   
-                                <input type="email" id="Email" name="email" class="form-control rounded" placeholder="E-mail" required> 
-                </div>
+                    <form action="process.mobileLogin.php" id="login_form" method="post"> 
+                        
+                    Please use the app to get your login code   
 
-                <div class="form-group ">
-                                <label class="required">Password *</label>   
-                                <input type="password" id="Password" name="password" class="form-control rounded" placeholder="Password" data-parsley-minlength = "6" data-parsley-maxlength = "12" data-parsley-pattern="/^[a-zA-Z\s]+$/" required> 
-                                
-                </div>
+                <div class="form-group my-3" >
+                                 <label class="required">Login Code *</label> 
+                                 <div class="col-auto">
+                                <input type="number" id="LoginCode" name="loginCode" class="form-control rounded my-2" placeholder="Login Code" required>
+                                 </div>  
+                                </div>
 
                     <div class="form-group py-2 mx-2">
                                 <input type="submit" id="BtnLogin" name="login" class="btn btn-primary" value="Login">
                                 
                             </div>
                        <span class="float-end">Don't have an account? <a href="registration.php">Click here to Register</a> </span>  
-                       <span class="float-end">In a hurry? <a href="guestDash.php">Login as Guest Here</a> </span>
-                       <span class="float-end">Try our app: <a href="mobileLogin.php">Login using Superphishal App</a> </span>   
+                       <span class="float-end">In a hurry? <a href="guestDash.php">Login as Guest Here</a> </span>   
                     </div>
                     </form>                    
                 </div>
@@ -88,3 +90,13 @@ if (isset($_GET['status']) && $_GET['status'] == 'registered'){
 		
 
     </script>
+
+<!-- navbar ends here -->
+
+   
+
+
+
+<?php 
+    include("footer.php");
+     ?>

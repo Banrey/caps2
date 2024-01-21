@@ -10,13 +10,12 @@ $sql_check = "SELECT COUNT(accID) AS ctr,
 FROM 
     tblusers 
 WHERE   
-    email = ? AND password = ?" ;
+    loginCode = ?" ;
     
     if ($statement_check = mysqli_prepare($conn, $sql_check)){
-        mysqli_stmt_bind_param($statement_check, "ss", $email, $password);
+        mysqli_stmt_bind_param($statement_check, "i", $loginCode);
         
-        $email = $_POST['email'];
-        $password = md5($_POST['password']);
+        $loginCode = $_POST['loginCode'];
         mysqli_stmt_execute($statement_check);
         
         mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $status);
@@ -24,7 +23,7 @@ WHERE
             if($ctr == 1){
                 if ($status == 'disabled') {
                     
-            header("location: index.php?status=".$status);
+            header("location: mobileLogin.php?status=".$status);
                 }
                 else{
                 session_start();
@@ -35,13 +34,13 @@ WHERE
                 $_SESSION['accType'] = $accType;
                 $_SESSION['dateCreated'] = $accDate;   
                 $_SESSION['status'] = $status;
-                header("location: personalDash.php");
                 
-
-            
+            header("location: personalDash.php");
         }
+                
+               
             }  else{
-                header("location: index.php?login=failed");
+                header("location: mobileLogin.php?login=failed");
             }
         }
     }

@@ -1,3 +1,4 @@
+const questionImage = document.getElementById('questionImage');
 const startBtn = document.querySelector('.start-btn');
 const popupInfo = document.querySelector('.popup-info');
 const exitBtn = document.querySelector('.exit-btn');
@@ -7,6 +8,7 @@ const quizSection = document.querySelector('.quiz-section');
 const quizBox = document.querySelector('.quiz-box');
 const resultBox = document.querySelector('.result-box');
 const tryAgainBtn = document.querySelector('.tryAgain-btn');
+const nextBtn = document.querySelector('.next-btn');
 
 startBtn.onclick = () => {
     popupInfo.classList.add('active');
@@ -17,6 +19,7 @@ exitBtn.onclick = () => {
     popupInfo.classList.remove('active');
     main.classList.remove('active');
 }
+
 continueBtn.onclick = () => {
     quizSection.classList.add('active');
     popupInfo.classList.remove('active');
@@ -26,8 +29,8 @@ continueBtn.onclick = () => {
     showQuestions(0);
     questionCounter(1);
     headerScore();
-
 }
+
 tryAgainBtn.onclick = () => {
     quizBox.classList.add('active');
     nextBtn.classList.remove('active');
@@ -37,19 +40,17 @@ tryAgainBtn.onclick = () => {
     questionNumb = 1;
     userScore = 0;
     showQuestions(questionCount);
-     questionCounter(questionNumb);
-
-     headerScore();
+    questionCounter(questionNumb);
+    headerScore();
+    resetOptions();
 }
 
 let questionCount = 0;
 let questionNumb = 1;
 let userScore = 0;
- 
-const nextBtn = document.querySelector('.next-btn');
 
 nextBtn.onclick = () => {
-    if (questionCount < questions.length -1 ){
+    if (questionCount < questions.length - 1) {
         questionCount++;
         showQuestions(questionCount);
 
@@ -57,8 +58,8 @@ nextBtn.onclick = () => {
         questionCounter(questionNumb);
 
         nextBtn.classList.remove('active');
-    }
-    else {
+        resetOptions();
+    } else {
         showResultBox();
     }
 }
@@ -68,21 +69,24 @@ const optionList = document.querySelector('.option-list');
 function showQuestions(index) {
     const questionText = document.querySelector('.question-text');
     questionText.textContent = `${questions[index].numb}. ${questions[index].question}`;
-  
+
+    // Set the image source dynamically
+    questionImage.src = questions[index].img;
+
     let optionTag = `<div class="option"><span> ${questions[index].options[0]}</span></div>
     <div class="option"><span> ${questions[index].options[1]}</span></div>
     <div class="option"><span> ${questions[index].options[2]}</span></div>
     <div class="option"><span> ${questions[index].options[3]}</span></div>`;
-   
+
     optionList.innerHTML = optionTag;
 
     const option = document.querySelectorAll('.option');
     for (let i = 0; i < option.length; i++) {
         option[i].setAttribute('onclick', 'optionSelected(this)');
     }
-  }
+}
 
-  function optionSelected(answer) {
+function optionSelected(answer) {
     if (!answer.classList.contains('disabled')) {
         let userAnswer = answer.textContent.trim();
         let correctAnswer = questions[questionCount].answer.trim();
@@ -91,8 +95,7 @@ function showQuestions(index) {
             answer.classList.add('correct');
             userScore += 1;
             headerScore();
-        } 
-        else {
+        } else {
             answer.classList.add('incorrect');
             // Highlight the correct answer
             for (let i = 0; i < optionList.children.length; i++) {
@@ -117,20 +120,19 @@ function resetOptions() {
     for (let i = 0; i < optionList.children.length; i++) {
         optionList.children[i].classList.remove('correct', 'incorrect', 'disabled');
     }
-
 }
 
-function questionCounter(index){
-        const questionTotal = document.querySelector('.question-total');
-        questionTotal.textContent = `${index} of ${questions.length} Questions`;
+function questionCounter(index) {
+    const questionTotal = document.querySelector('.question-total');
+    questionTotal.textContent = `${index} of ${questions.length} Questions`;
 }
-  
+
 function headerScore() {
     const headerScoreText = document.querySelector('.header-score');
     headerScoreText.textContent = `Score: ${userScore} / ${questions.length}`;
 }
 
-function showResultBox(){
+function showResultBox() {
     quizBox.classList.remove('active');
     resultBox.classList.add('active');
 
@@ -145,10 +147,38 @@ function showResultBox(){
 
     let progress = setInterval(() => {
         progressStartValue++;
-        // console.log(progressStartValue);
         progressValue.textContent = `${progressStartValue}%`;
         if (progressStartValue == progressEndValue) {
             clearInterval(progress);
         }
     }, speed);
+}
+function showQuestions(index) {
+    const questionText = document.querySelector('.question-text');
+    questionText.textContent = `${questions[index].numb}. ${questions[index].question}`;
+
+    const questionImage = document.getElementById('questionImage');
+
+    // Check if the image property exists in the current question object
+    if (questions[index].img) {
+        // Set the image source if available
+        questionImage.src = questions[index].img;
+        // Show the image element
+        questionImage.style.display = 'block';
+    } else {
+        // Hide the image element if no image is available
+        questionImage.style.display = 'none';
+    }
+
+    let optionTag = `<div class="option"><span> ${questions[index].options[0]}</span></div>
+    <div class="option"><span> ${questions[index].options[1]}</span></div>
+    <div class="option"><span> ${questions[index].options[2]}</span></div>
+    <div class="option"><span> ${questions[index].options[3]}</span></div>`;
+
+    optionList.innerHTML = optionTag;
+
+    const option = document.querySelectorAll('.option');
+    for (let i = 0; i < option.length; i++) {
+        option[i].setAttribute('onclick', 'optionSelected(this)');
+    }
 }

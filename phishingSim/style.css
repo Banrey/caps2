@@ -194,6 +194,11 @@ popup-info h2 {
 .quiz-section.active  {
     left: 0;
 }
+.quiz-box {
+    max-height: 1000px; /* Set a maximum height for the quiz box */
+    overflow-y: auto; /* Enable vertical scrollbar if needed */
+    /* ... other styles ... */
+}
 .quiz-section .quiz-box{
     position: relative;
     width: 950px;
@@ -226,7 +231,7 @@ popup-info h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 15px 0;
     border-bottom: 2px solid #59a0de;
     margin-bottom: 5px;
 }
@@ -243,14 +248,18 @@ popup-info h2 {
     font-size: 15px;
     font-weight: 400;
 }
+/* .option-list {
+    max-height: 200px; 
+    overflow-y: auto; 
+}*/
 .option-list .option {
     width: 100%;
     padding: 12px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 2);
     border-radius: 4px;
-    font-size: 17px;
-    margin: 15px 0;
+    font-size: 15px;
+    margin: 10px 0;
     cursor: pointer;
     transition: .3s;
 }
@@ -274,11 +283,11 @@ popup-info h2 {
     justify-content: space-between;
     align-items: center;
     border-top: 2px solid #59a0de;
-    padding-top: 15px;
+    padding-top: 10px;
     /*margin-top: 15px;*/
 }
 .quiz-footer .question-total {
-    font-size: 35px;
+    font-size: 15px;
     font-weight: 600;
 }
 .quiz-footer .next-btn {
