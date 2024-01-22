@@ -1,6 +1,7 @@
 <?php 
 include("header.php");
 include("connCheck.php");
+session_start();
 
 ?>
 
@@ -38,12 +39,12 @@ include("connCheck.php");
                                         <div class="form-group">
                                             <label>Post Title*</label>   
                                             <select name="Status" id="Status">
-                                                <?php if ($get_posts["status"]== "solved") { ?>
-                                                    <option value="solved">Solved</option>
-                                                    <option value="unsolved">Unsolved</option>
+                                                <?php if ($get_posts["status"]== "answered") { ?>
+                                                    <option value="answered">Answered</option>
+                                                    <option value="unanswered">Unanswered</option>
                                                 <?php } else{?> 
-                                                    <option value="unsolved">Unsolved</option>
-                                                    <option value="solved">Solved</option>
+                                                    <option value="unanswered">Unanswered</option>
+                                                    <option value="answered">Answered</option>
 
                                                     <?php } ?>
                                             </select>
