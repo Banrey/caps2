@@ -187,7 +187,7 @@ $(idTxt).scrollTop($(idTxt)[0].scrollHeight);
 
  $('#BtnPost').on('click', function () {
     
-    window.location = "company_post.php";
+    window.location = "vlog_form.php";
 
 
  });

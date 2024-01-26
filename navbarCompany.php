@@ -1,6 +1,9 @@
+
+	<!-- Load login stylesheet -->
+	<link rel="stylesheet" href="nav.css">
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 bg-warning">
+        <div class="col-auto col-md-3 col-xl-2 bg-primary" >
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark min-vh-100">
                 <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline"><?php 
@@ -9,7 +12,7 @@
 
                                                                 }
                                                                 else{?>
-                                                                <p id="accID"> 
+                                                                <p id="accID" style="color: white;"> 
                                                                     <?php 
                                                                         if(empty($_SESSION['accID']) && empty($_SESSION['cadminID'])){
                                                                             echo 'Logged in as Guest';
@@ -21,9 +24,9 @@
                                                                 }?></span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
+                    <li class="nav-item" >
                         <a href="phishingVids" class="nav-link link-dark align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Videos</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline ">Videos</span>
                         </a>
                     </li>
                     <li class="nav-item">

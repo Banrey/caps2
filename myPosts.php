@@ -39,6 +39,7 @@ include("requireLogin.php");
                     <div class="container-fluid col-lg-10 mx-2">
                             <?php
                                 include("postloop.php");
+                                include("cpostloop.php");
                             ?>         
                     </div>
                 </div>

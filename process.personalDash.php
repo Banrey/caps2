@@ -11,7 +11,6 @@
 			str_replace("@","_",$email);
 			mysqli_stmt_execute($statement_check);
             } else{
-                exit();
             }
             
 			

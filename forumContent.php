@@ -9,7 +9,7 @@ include("header.php");
             
             <a href="post_form.php">
         
-        <button type="button" id="BtnPost" class="btn btn-primary mt-3 mx-auto">New Post</button>
+        <button type="button" id="BtnPost" class="btn btn-warning mt-3 mx-auto" tabindex="3">New Post</button>
     </a>
 
 
@@ -24,7 +24,7 @@ include("header.php");
                         
     <?php $qry_solved = mysqli_query($conn, $sql_solved); ?>
     <?php while($get_solved = mysqli_fetch_array($qry_solved)){ ?>
-        <h3 class="float-end"> Solved Issues:<?php echo $get_solved["ctr"]?></h3>
+        <h3 class="float-end"> Queries Answered:<?php echo $get_solved["ctr"]?></h3>
         
     </div>
         <?php } ?>

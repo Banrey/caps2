@@ -72,9 +72,10 @@ $sql_insert = "INSERT INTO tblusers
                     $mail->Body = 'Please click the link to verify your Superphishal account <p> <a href="http://localhost/Activities/caps2/verify.php?vcode='.$verficationCode.'">Verify Your account here </a></p>';
                     $mail->AltBody = 'Body in plain text for non-HTML mail clients';
                     $mail->send();
-                    echo "Mail has been sent successfully!";
+                    echo "Mail has been sent successfully!";         
                     ?>
-                    <script>
+                    <script>      
+                window.location = "index.php?status=registered";
                 
                 
             </script>
@@ -83,6 +84,7 @@ $sql_insert = "INSERT INTO tblusers
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
+
             }
 
             else {

@@ -11,7 +11,7 @@ include("requireLogin.php");
 <!-- navbar Starts here -->
 <?php if(empty($_SESSION["accID"])){
     include("navbarHead.php");
-} else{include("navbarLogged.php");}
+} else{include("navbarCompany.php");}
         
         ?>
             <!---->

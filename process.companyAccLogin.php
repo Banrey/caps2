@@ -23,21 +23,28 @@ WHERE
         
         mysqli_stmt_bind_result($statement_check, $ctr, $accID, $email, $username, $accType, $accDate, $companyID, $status);
         while(mysqli_stmt_fetch($statement_check)){
-            if($ctr == 1 && $companyID !== 0){
+            if($ctr == 1){
+                if ($status == 'disabled') {
+                    
+            header("location: companyPortal.php?status=".$status);
+                }
+                else{
                 session_start();
                 $_SESSION['session_id'] = session_id();
                 $_SESSION['accID'] = $accID;
                 $_SESSION['email_address'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['accType'] = $accType;
-                $_SESSION['dateCreated'] = $accDate;
-                $_SESSION['companyID'] = $companyID;
+                $_SESSION['dateCreated'] = $accDate;  
+                $_SESSION['companyID'] = $companyID;   
                 $_SESSION['status'] = $status;
+                header("location: companyDash.php");
                 
-               
+
+            
+        }
             }  else{
-                $_SESSION['session_id'] = "";
-                $_SESSION['status'] = "nologin";
+                header("location: companyPortal.php?login=failed");
             }
         }
     }

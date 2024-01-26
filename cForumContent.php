@@ -13,7 +13,23 @@ include("header.php");
 <h1><?php echo "Welcome to ".$get_cname['companyName']." company forums"; ?></h1>
 <div id="post_container">
     <a href="company_post.php">
-    <button type="button" id="BtnPost" class="btn btn-primary mt-3 mx-auto">New Post</button></a>
+    <button type="button" id="BtnPost" class="btn btn-primary mt-3 mx-4">New Post</button></a>
+
+    
+<?php $sql_solved = "
+                        SELECT count(status) AS ctr
+                        FROM
+                        companyposts 
+                        
+                        WHERE status = 'solved'"							
+                        ?>    
+                        
+    <?php $qry_solved = mysqli_query($conn, $sql_solved); ?>
+    <?php while($get_solved = mysqli_fetch_array($qry_solved)){ ?>
+        <h3 class="float-end"> Queries Answered:<?php echo $get_solved["ctr"]?></h3>
+        
+    </div>
+        <?php } ?>
     
     <!--One Entry-->
     <?php $sql_posts = "

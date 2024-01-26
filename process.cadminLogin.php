@@ -32,13 +32,14 @@ WHERE
                 $_SESSION['username'] = $user;             
                 $_SESSION['status'] = $status;
                 
-                echo  $ctr. $cID. $email. $user; 
+                exit();
                
             }  else{
                 $_SESSION['session_id'] = "";
                 $_SESSION['status'] = "nologin";
                 //error handling
                 echo  $ctr. $cID. $email. $user."fail"; 
+                exit();
             }
         }
     }

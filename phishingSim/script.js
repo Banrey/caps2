@@ -74,9 +74,7 @@ function showQuestions(index) {
     questionImage.src = questions[index].img;
 
     let optionTag = `<div class="option"><span> ${questions[index].options[0]}</span></div>
-    <div class="option"><span> ${questions[index].options[1]}</span></div>
-    <div class="option"><span> ${questions[index].options[2]}</span></div>
-    <div class="option"><span> ${questions[index].options[3]}</span></div>`;
+    <div class="option"><span> ${questions[index].options[1]}</span></div>`;
 
     optionList.innerHTML = optionTag;
 
@@ -139,6 +137,20 @@ function showResultBox() {
     const scoreText = document.querySelector('.score-text');
     scoreText.textContent = `Your Score ${userScore} out of ${questions.length}`;
 
+    let remark = "";
+
+    // Set remarks based on the user's score
+    if (userScore >= 4) {
+        remark = "You are not vulnerable to phishing attacks.";
+    } else {
+        remark = "You are vulnerable to phishing attacks.";
+    }
+
+    const remarkText = document.createElement('p');
+    remarkText.textContent = remark;
+    remarkText.classList.add('remark-text'); // Add a class for styling
+    resultBox.appendChild(remarkText);
+
     const circularProgress = document.querySelector('.circular-progress');
     const progressValue = document.querySelector('.progress-value');
     let progressStartValue = 0;
@@ -152,33 +164,4 @@ function showResultBox() {
             clearInterval(progress);
         }
     }, speed);
-}
-function showQuestions(index) {
-    const questionText = document.querySelector('.question-text');
-    questionText.textContent = `${questions[index].numb}. ${questions[index].question}`;
-
-    const questionImage = document.getElementById('questionImage');
-
-    // Check if the image property exists in the current question object
-    if (questions[index].img) {
-        // Set the image source if available
-        questionImage.src = questions[index].img;
-        // Show the image element
-        questionImage.style.display = 'block';
-    } else {
-        // Hide the image element if no image is available
-        questionImage.style.display = 'none';
-    }
-
-    let optionTag = `<div class="option"><span> ${questions[index].options[0]}</span></div>
-    <div class="option"><span> ${questions[index].options[1]}</span></div>
-    <div class="option"><span> ${questions[index].options[2]}</span></div>
-    <div class="option"><span> ${questions[index].options[3]}</span></div>`;
-
-    optionList.innerHTML = optionTag;
-
-    const option = document.querySelectorAll('.option');
-    for (let i = 0; i < option.length; i++) {
-        option[i].setAttribute('onclick', 'optionSelected(this)');
-    }
 }

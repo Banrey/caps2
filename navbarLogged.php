@@ -9,14 +9,14 @@
 
                                                                 }
                                                                 else{?>
-                                                                <p id="accID"> 
+                                                                <h4 id="accID"> 
                                                                     <?php 
                                                                         if(empty($_SESSION['session_id'])){
                                                                             echo 'Logged in as Guest';
                                                                         } else {
                                                                             echo 'Logged in as '.$_SESSION['username'];
                                                                         } ?>
-                                                                </p>
+                                                                </h4>
                                                                     <?php
                                                                 }?></span>
                 </a>

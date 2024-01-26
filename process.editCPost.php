@@ -26,6 +26,8 @@ if (@$_GET["action"] == "rate"){
 			$id = $_POST['postID'];
 			$status = $_POST['status'];
 			mysqli_stmt_execute($statement_check);
+			
+		exit();
         
 		}
 }

@@ -200,7 +200,6 @@ session_start();
                 
                 var commentID = this.className;
                 var rating = this.value;
-                alert(rating);
                 
                 $.post("process.editPost.php?action=rate", {
                         rating: rating,

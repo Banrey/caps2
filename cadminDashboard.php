@@ -29,7 +29,6 @@ WHERE cadminID =".$_SESSION["cadminID"];
                         }
 
 
-                        include("navbarCompany.php");
 ?>
 
 <div class="container">
@@ -58,8 +57,8 @@ WHERE cadminID =".$_SESSION["cadminID"];
                 <div class="card-body">
                     
             <?php echo $get_cadmin["companyName"];?> 
-            <a href=<?php echo "editCompany.php?companyID=".$get_cadmin["companyID"]."&action=accept"?>>Details  </a>
-            <a href=<?php echo "process.companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=delete"?>>Delete</a>
+            <a href=<?php echo "process.companyDetails.php?companyID=".$get_cadmin["companyID"]."&action=delete"?>><button class="btn btn-danger"  style="float: right;" type = "button">Delete</button></a>
+            <a href=<?php echo "editCompany.php?companyID=".$get_cadmin["companyID"]."&action=accept"?>><button class="btn btn-primary mx-2" style="float: right;" type = "button">Details</button>  </a>
 
                 </div>
 

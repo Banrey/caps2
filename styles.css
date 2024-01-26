@@ -6,3 +6,11 @@ div.sticky {
 .jcSb{
   justify-content: space-between;
 }
+
+.btn {
+	font-size: 14px;
+	border-radius: 3px;
+	padding: 10px 30px;
+	box-shadow: 0 4px 10px var(--shadow-color);
+	font-weight: 600;
+}

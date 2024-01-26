@@ -404,3 +404,10 @@ popup-info h2 {
     background:#59a0de;
     color: #fff;
 }
+.remark-text {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px; /* Adjust the margin as needed */
+    color: #fff; /* Use the same color as other text */
+    text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}

@@ -47,6 +47,8 @@ $sql_insert = "INSERT INTO tblusers
         
 				
 				mysqli_stmt_execute($statement);
+                exit();
+
             }
 
             else {

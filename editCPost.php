@@ -187,8 +187,7 @@ session_start();
                         postID: pID
                     }, function(data,status) {
 						if(status == "success"){
-                        alert(pID);
-                        window.location = "editPost.php?postID=" + pID;
+                        window.location = "editCPost.php?postID=" + pID;
 						}
                     })
                 }
@@ -201,7 +200,6 @@ session_start();
                 
                 var commentID = this.className;
                 var rating = this.value;
-                alert(rating);
                 
                 $.post("process.editCPost.php?action=rate", {
                         rating: rating,
@@ -209,7 +207,7 @@ session_start();
 
                     }, function(data,status) {
 						if(status == "success"){
-                        window.location = "editPost.php?postID=" + pID;
+                        window.location = "editCPost.php?postID=" + pID;
 						}
                     })
         

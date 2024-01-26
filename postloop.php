@@ -11,7 +11,7 @@ $sql_posts = "SELECT postID, title, content, status, datePosted
             
             ?>
             <div class="col-md-9 card my-3">
-            <div class="card-body"><?php  echo "No Posts";?></div></div>
+            <div class="card-body"><?php  echo "No Public Forum Posts";?></div></div>
             <?php 
          }
          else{

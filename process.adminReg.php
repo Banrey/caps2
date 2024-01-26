@@ -44,6 +44,7 @@ $sql_insertAdmin = "INSERT INTO tblcompanyadmin
 				
 				mysqli_stmt_execute($statement);
                 echo 'query successful';
+                exit();
                 
             }
 
